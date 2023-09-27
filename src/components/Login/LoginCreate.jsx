@@ -1,7 +1,38 @@
 import React from 'react';
+import Input from '../Forms/Input';
+import Button from '../Forms/Button';
+import useForm from '../../hooks/useForm';
+import { USER_POST } from '../../api';
+import { UserContext } from '../../UserContext';
 
 function LoginCreate() {
-  return <div>LoginCreate</div>;
+  const username = useForm();
+  const email = useForm('email');
+  const password = useForm('password');
+  const { userLogin } = React.useContext(UserContext);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const { url, options } = USER_POST({
+      username: username.value,
+      email: email.value,
+      password: password.value,
+    });
+    const apiResponse = await fetch(url, options);
+    if (apiResponse.ok) await userLogin(username.value, password.value);
+  }
+
+  return (
+    <section className="animeLeft">
+      <h1 className="title">Cadastre-se</h1>
+      <form onSubmit={handleSubmit}>
+        <Input type="text" name="username" label="Usuário" {...username} />
+        <Input type="email" name="email" label="E-mail" {...email} />
+        <Input type="password" name="password" label="Senha" {...password} />
+        <Button>Cadastrar</Button>
+      </form>
+    </section>
+  );
 }
 
 export default LoginCreate;
