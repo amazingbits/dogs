@@ -24,7 +24,9 @@ const FeedPhotos = ({ setModalPhoto, user, page, setInfinite }) => {
   if (error) return <Error error={error} />;
   if (loading) return <Loading />;
   if (!loading && data && data.length === 0)
-    return <p className={styles.notFound}>Todos os itens foram carregados</p>;
+    return (
+      <p className={styles.notFound}>Não há mais itens para serem carregados</p>
+    );
   if (data)
     return (
       <ul className={`${styles.feed} animeLeft`}>

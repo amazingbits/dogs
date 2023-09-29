@@ -5,6 +5,7 @@ import { PHOTO_GET } from '../../api';
 import Error from '../Helper/Error';
 import Loading from '../Helper/Loading';
 import PhotoContent from './PhotoContent';
+import Head from '../Helper/Head';
 
 const Photo = () => {
   const { id } = useParams();
@@ -19,9 +20,15 @@ const Photo = () => {
   if (loading) return <Loading />;
   if (data) {
     return (
-      <section className={`container mainContainer`}>
-        <PhotoContent data={data} single={true} />
-      </section>
+      <>
+        <Head
+          title={data.photo.title}
+          description={`Página do(a) ${data.photo.title}`}
+        />
+        <section className={`container mainContainer`}>
+          <PhotoContent data={data} single={true} />
+        </section>
+      </>
     );
   } else {
     return null;
