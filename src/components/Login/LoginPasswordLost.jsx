@@ -25,7 +25,7 @@ function LoginPasswordLost() {
   return (
     <>
       <Head title="Perdeu a senha?" description="Perdeu a sua senha?" />
-      <section>
+      <section className="animeLeft">
         <h1 className="title">Perdeu a senha?</h1>
         {data ? (
           <p style={{ color: '#4c1' }}>{data}</p>
